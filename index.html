@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indore Florist - Premium Flower & Wedding Decor Delivery</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#db2777', // Vibrant Pink
+                        secondary: '#f59e0b', // Sunny Yellow
+                        accent: '#10b981', // Fresh Mint Green
+                        dark: '#1f2937',
+                        whatsapp: '#25D366' // WhatsApp Brand Color
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles & Animations */
+        body { scroll-behavior: smooth; }
+        
+        /* Hide scrollbar for category row */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Fade in animation for view switching */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cheerful Background */
+        .garden-bg {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fffbeb 50%, #f0fdf4 100%);
+        }
+
+        /* Corner Garden Animations */
+        .corner-garden {
+            position: fixed;
+            pointer-events: none; /* Prevents them from blocking clicks */
+            z-index: 40; /* Stays below the header (z-50) */
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+        }
+        .cg-tl { top: -20px; left: -20px; transform-origin: top left; animation: sway-1 6s ease-in-out infinite alternate; }
+        .cg-tr { top: -20px; right: -20px; transform-origin: top right; animation: sway-2 7s ease-in-out infinite alternate; }
+        .cg-bl { bottom: -20px; left: -20px; transform-origin: bottom left; animation: sway-1 8s ease-in-out infinite alternate; }
+        .cg-br { bottom: -20px; right: -20px; transform-origin: bottom right; animation: sway-2 6.5s ease-in-out infinite alternate; }
+
+        @keyframes sway-1 { 0% { transform: rotate(-4deg); } 100% { transform: rotate(4deg); } }
+        @keyframes sway-2 { 0% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
+        @keyframes float-gentle { 0% { transform: translateY(0px); } 100% { transform: translateY(-6px); } }
+
+        .flower-cluster { position: relative; width: 120px; height: 120px; }
+        .flower-cluster span { position: absolute; display: inline-block; }
+        .breathe { animation: float-gentle 3s ease-in-out infinite alternate; }
+
+        /* Responsive scaling for mobile so it doesn't cover the screen */
+        @media (max-width: 768px) {
+            .corner-garden { transform: scale(0.65); }
+            .cg-tl { top: -25px; left: -25px; }
+            .cg-tr { top: -25px; right: -25px; }
+            .cg-bl { bottom: -25px; left: -25px; }
+            .cg-br { bottom: -25px; right: -25px; }
+        }
+    </style>
+</head>
+<body class="garden-bg text-gray-800 font-sans min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Corner Animated Gardens -->
+    <div class="corner-garden cg-tl">
+        <div class="flower-cluster">
+            <span style="font-size: 4rem; top: 10px; left: 10px; transform: rotate(135deg);">🌿</span>
+            <span style="font-size: 3rem; top: 60px; left: -10px; transform: rotate(45deg);">🍃</span>
+            <span class="breathe" style="font-size: 2.5rem; top: 50px; left: 50px;">🌸</span>
+        </div>
+    </div>
+    <div class="corner-garden cg-tr">
+        <div class="flower-cluster">
+            <span style="font-size: 4rem; top: 10px; right: 10px; transform: rotate(-135deg) scaleX(-1);">🌿</span>
+            <span style="font-size: 2.5rem; top: 50px; right: 40px; transform: rotate(-20deg);">🌺</span>
+            <span class="breathe" style="font-size: 1.5rem; top: 30px; right: 70px;">✨</span>
+        </div>
+    </div>
+    <div class="corner-garden cg-bl">
+        <div class="flower-cluster">
+            <span style="font-size: 4rem; bottom: 10px; left: 10px; transform: rotate(45deg);">🌿</span>
+            <span class="breathe" style="font-size: 2.5rem; bottom: 40px; left: 50px;">🌼</span>
+            <span style="font-size: 2rem; bottom: 60px; left: 10px; transform: rotate(70deg);">🍃</span>
+        </div>
+    </div>
+    <div class="corner-garden cg-br">
+        <div class="flower-cluster">
+            <span style="font-size: 4rem; bottom: 10px; right: 10px; transform: rotate(-45deg) scaleX(-1);">🌿</span>
+            <span style="font-size: 3rem; bottom: 50px; right: -10px; transform: rotate(-20deg);">🌺</span>
+            <span class="breathe" style="font-size: 2rem; bottom: 45px; right: 55px; transform: rotate(-15deg);">🦋</span>
+        </div>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-primary via-rose-500 to-secondary text-white text-xs md:text-sm py-2.5 px-4 text-center font-medium shadow-sm relative z-50">
+        🌸 Welcome to Indore's Most Colorful Floral Garden! Browse our catalog & DM us for prices. 🌸
+    </div>
+
+    <!-- Header / Nav -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-pink-100">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between gap-4">
+                
+                <!-- Logo (Clickable to go Home) -->
+                <a href="#" onclick="showHome(event)" class="flex-shrink-0 flex items-center gap-2 cursor-pointer group">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white group-hover:rotate-12 transition-transform shadow-md">
+                        <i class="fa-solid fa-seedling text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-serif font-bold text-primary leading-none tracking-tight">Indore Florist</h1>
+                        <p class="text-[10px] text-pink-500 uppercase tracking-widest font-semibold">Digital Catalog</p>
+                    </div>
+                </a>
+
+                <!-- Search Bar (Desktop) -->
+                <div class="hidden md:flex flex-1 max-w-2xl mx-8 relative">
+                    <input type="text" placeholder="Search for colorful flowers, notes, chocolates..." class="w-full bg-pink-50/50 border border-pink-200 rounded-full py-2.5 pl-5 pr-12 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:bg-white transition-all text-sm">
+                    <button class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- User & Action Icons -->
+                <div class="flex items-center gap-5">
+                    <div class="hidden sm:flex items-center gap-1.5 cursor-pointer text-gray-600 hover:text-primary transition-colors">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        <span class="text-sm font-medium border-b border-dashed border-pink-300">Indore</span>
+                    </div>
+                    
+                    <!-- Direct WhatsApp Contact Button with New Number -->
+                    <a href="https://wa.me/918770836221" target="_blank" class="text-whatsapp hover:text-green-600 transition-colors flex flex-col items-center gap-1 relative group" title="Chat with us">
+                        <div class="relative w-8 h-8 rounded-full bg-green-50 flex items-center justify-center border border-green-200 shadow-sm group-hover:bg-whatsapp group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="mt-4 md:hidden relative">
+                <input type="text" placeholder="Search flowers, decor..." class="w-full bg-pink-50 border border-pink-200 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm">
+                <button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary w-8 h-8 flex items-center justify-center">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- ========================================== -->
+        <!-- VIEW 1: HOME VIEW                          -->
+        <!-- ========================================== -->
+        <div id="home-view" class="fade-in block relative z-30">
+            
+            <!-- Colorful Services & Collections Section (Top of Page) -->
+            <section id="main-categories" class="pt-8 pb-16">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-5xl font-serif font-extrabold text-gray-900 mb-2 tracking-tight"><span class="text-primary">Our</span> Collections</h2>
+                        <p class="text-sm md:text-base text-gray-600 font-medium">Explore our vibrant garden of services and gifts.</p>
+                    </div>
+
+                    <!-- Vibrant, Picture-Focused Grid (8 items for perfect layout) -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto">
+                        
+                        <!-- 1: Flower Bouquets -->
+                        <div onclick="showCategory('flowers', 'Flower Bouquets', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-pink-300 hover:shadow-xl hover:shadow-pink-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-pink-50">
+                                <img src="Flower Bouquet.png" onerror="this.src='https://images.unsplash.com/photo-1591886960571-74d43a9d4166?ixlib=rb-4.0.3&w=600&q=80'" alt="Flower Bouquets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-primary transition-colors text-center leading-tight">Flower Bouquets</h3>
+                        </div>
+
+                        <!-- 2: Money Bouquets -->
+                        <div onclick="showCategory('notes', 'Money Bouquets', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-yellow-300 hover:shadow-xl hover:shadow-yellow-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-yellow-50">
+                                <img src="Note Bouquet.png" onerror="this.src='https://images.unsplash.com/photo-1580519542036-ed47f3e42214?ixlib=rb-4.0.3&w=600&q=80'" alt="Money Bouquets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-secondary transition-colors text-center leading-tight">Money Bouquets</h3>
+                        </div>
+
+                        <!-- 3: Chocolate Bouquets -->
+                        <div onclick="showCategory('chocolates', 'Chocolate Bouquets', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-rose-300 hover:shadow-xl hover:shadow-rose-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-rose-50">
+                                <img src="Chocolate Bouquet.png" onerror="this.src='https://images.unsplash.com/photo-1548845976-591734bc1a72?ixlib=rb-4.0.3&w=600&q=80'" alt="Chocolate Bouquets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors text-center leading-tight">Chocolate Bouquets</h3>
+                        </div>
+
+                        <!-- 4: Wedding Varmala -->
+                        <div onclick="showCategory('varmala', 'Wedding Varmala', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-red-300 hover:shadow-xl hover:shadow-red-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-red-50">
+                                <img src="Varmala Cover.png" onerror="this.src='https://images.unsplash.com/photo-1583939411023-147831792618?ixlib=rb-4.0.3&w=600&q=80'" alt="Wedding Varmala" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-red-600 transition-colors text-center leading-tight">Wedding Varmala</h3>
+                        </div>
+                        
+                        <!-- 5: Flower Jewelry -->
+                        <div onclick="showCategory('jewelry', 'Flower Jewelry', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-teal-300 hover:shadow-xl hover:shadow-teal-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-teal-50">
+                                <img src="Flower Jewelry Cover.WEBP" onerror="this.src='https://images.unsplash.com/photo-1601614911762-2eb26fc26815?ixlib=rb-4.0.3&w=600&q=80'" alt="Flower Jewelry" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors text-center leading-tight">Flower Jewelry</h3>
+                        </div>
+
+                        <!-- 6: Bride Entry Chadar -->
+                        <div onclick="showCategory('chadar', 'Bride Entry Chadar', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-purple-300 hover:shadow-xl hover:shadow-purple-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-purple-50">
+                                <img src="Chadar Cover.WEBP" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&w=600&q=80'" alt="Bride Entry Chadar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors text-center leading-tight">Bride Entry Chadar</h3>
+                        </div>
+
+                        <!-- 7: Car Decoration -->
+                        <div onclick="showCategory('car', 'Car Decoration', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-blue-50">
+                                <img src="Car Decor Cover.WEBP" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&w=600&q=80'" alt="Car Decoration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors text-center leading-tight">Car Decoration</h3>
+                        </div>
+
+                        <!-- 8: Room Decoration -->
+                        <div onclick="showCategory('room', 'Room Decoration', event)" class="cursor-pointer group flex flex-col items-center bg-white rounded-3xl p-3 md:p-4 shadow-sm border-2 border-transparent hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-100 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-emerald-50">
+                                <img src="Room Decor Cover.WEBP" onerror="this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&w=600&q=80'" alt="Room Decoration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-800 group-hover:text-accent transition-colors text-center leading-tight">Room Decoration</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vibrant Pick Their Fav Flowers -->
+            <section class="py-12 bg-white/60 border-y border-pink-100 backdrop-blur-sm relative z-30">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl md:text-3xl font-serif font-bold text-gray-900">Favorite Blooms</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6 max-w-5xl mx-auto">
+                        <!-- Flower 1 -->
+                        <a href="#" onclick="showCategory('flowers', 'Rose Bouquets', event)" class="group flex flex-col items-center">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3 shadow-md border-4 border-white group-hover:border-primary transition-all duration-300">
+                                <img src="Rose Cover.png" onerror="this.src='https://images.unsplash.com/photo-1548845976-591734bc1a72?ixlib=rb-4.0.3&w=500&q=60'" alt="Roses" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-center text-sm md:text-base font-bold text-gray-800 group-hover:text-primary">Roses</h3>
+                        </a>
+                        <!-- Flower 2 -->
+                        <a href="#" onclick="showCategory('flowers', 'Carnation Bouquets', event)" class="group flex flex-col items-center">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3 shadow-md border-4 border-white group-hover:border-pink-400 transition-all duration-300">
+                                <img src="Carnation Cover.png" onerror="this.src='https://images.unsplash.com/photo-1605342939337-1eeec69b0fae?ixlib=rb-4.0.3&w=500&q=60'" alt="Carnations" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-center text-sm md:text-base font-bold text-gray-800 group-hover:text-pink-500">Carnations</h3>
+                        </a>
+                        <!-- Flower 3 -->
+                        <a href="#" onclick="showCategory('flowers', 'Orchid Bouquets', event)" class="group flex flex-col items-center">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3 shadow-md border-4 border-white group-hover:border-purple-500 transition-all duration-300">
+                                <img src="Orchid Cover.png" onerror="this.src='https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-4.0.3&w=500&q=60'" alt="Orchids" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-center text-sm md:text-base font-bold text-gray-800 group-hover:text-purple-600">Orchids</h3>
+                        </a>
+                        <!-- Flower 4 -->
+                        <a href="#" onclick="showCategory('flowers', 'Sunflower Bouquets', event)" class="group flex flex-col items-center">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3 shadow-md border-4 border-white group-hover:border-yellow-400 transition-all duration-300">
+                                <img src="Sunflower Cover.png" onerror="this.src='https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?ixlib=rb-4.0.3&w=500&q=60'" alt="Sunflowers" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-center text-sm md:text-base font-bold text-gray-800 group-hover:text-yellow-500">Sunflowers</h3>
+                        </a>
+                        <!-- Flower 5 -->
+                        <a href="#" onclick="showCategory('flowers', 'Gerbera Bouquets', event)" class="group flex flex-col items-center sm:col-start-2 md:col-start-auto">
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-3 shadow-md border-4 border-white group-hover:border-orange-400 transition-all duration-300">
+                                <img src="Gerbera Cover.png" onerror="this.src='https://images.unsplash.com/photo-1520050754871-33157fbaf085?ixlib=rb-4.0.3&w=500&q=60'" alt="Gerberas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-center text-sm md:text-base font-bold text-gray-800 group-hover:text-orange-500">Gerberas</h3>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div> <!-- End of Home View -->
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: CATEGORY PRODUCT LISTING VIEW      -->
+        <!-- ========================================== -->
+        <div id="category-view" class="hidden fade-in pb-16 relative z-30">
+            
+            <!-- Breadcrumbs & Vibrant Header -->
+            <div class="bg-white/80 backdrop-blur-md border-b border-pink-100 py-6 mb-8 shadow-sm">
+                <div class="container mx-auto px-4">
+                    <div class="text-xs text-pink-500 mb-2 flex items-center gap-2 font-medium">
+                        <a href="#" onclick="showHome(event)" class="hover:text-primary transition-colors">Home</a>
+                        <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                        <span id="breadcrumb-current" class="text-gray-900">Category Name</span>
+                    </div>
+                    <h2 id="category-page-title" class="text-3xl md:text-4xl font-serif font-extrabold text-primary">Category Name</h2>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4">
+                <!-- Full Width Layout -->
+                <div class="w-full">
+                    <!-- Controls -->
+                    <div class="flex flex-wrap justify-between items-center mb-6 text-sm text-gray-600 bg-white/60 p-3 rounded-2xl backdrop-blur-sm border border-pink-50 shadow-sm">
+                        <span id="product-count-text" class="font-medium text-gray-800 ml-2">Displaying <b id="current-count" class="text-primary">0</b> gorgeous designs in this catalog</span>
+                        <div class="flex items-center gap-2 mt-2 sm:mt-0 text-whatsapp font-bold cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> Found something you like? Click to inquire!
+                        </div>
+                    </div>
+
+                    <!-- JS Injected Grid (Max 4 Columns) -->
+                    <div id="dynamic-product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                        <!-- Cards inserted here by JS -->
+                    </div>
+                    
+                    <!-- Pagination (Visual only) -->
+                    <div class="mt-12 flex justify-center items-center gap-2">
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-pink-100 text-gray-400 shadow-sm"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold shadow-md transform scale-110">1</button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-pink-100 text-gray-700 hover:text-primary hover:border-primary font-medium shadow-sm transition-colors">2</button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-pink-100 text-gray-700 hover:text-primary hover:border-primary font-medium shadow-sm transition-colors">3</button>
+                        <span class="text-gray-400 mx-1">...</span>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-pink-100 text-primary hover:bg-pink-50 shadow-sm transition-colors"><i class="fa-solid fa-chevron-right text-sm"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-600 pt-16 pb-8 border-t border-pink-100 mt-auto relative z-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <!-- Brand Info -->
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-primary mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-seedling"></i> Indore Florist
+                    </h3>
+                    <p class="text-sm mb-6 text-gray-500 font-medium">Your vibrant local gifting and event partner in Indore. Specializing in premium bouquets, varmalas, bridal entries, floral jewelry, and complete colorful decor.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-pink-50 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-pink-50 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/918770836221" target="_blank" class="w-9 h-9 rounded-full bg-green-50 text-whatsapp border border-green-200 flex items-center justify-center hover:bg-whatsapp hover:text-white transition-colors shadow-sm"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                    </div>
+                </div>
+                <!-- Links & Info -->
+                <div>
+                    <h4 class="text-gray-900 font-bold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
+                    <ul class="space-y-3 text-sm font-medium">
+                        <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Delivery Information</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-bold mb-4 uppercase tracking-wider text-sm">Our Gardens</h4>
+                    <ul class="space-y-3 text-sm font-medium">
+                        <li><a href="#" onclick="showCategory('flowers', 'Flower Bouquets', event)" class="hover:text-primary transition-colors">Flower Bouquets</a></li>
+                        <li><a href="#" onclick="showCategory('notes', 'Money Bouquets', event)" class="hover:text-primary transition-colors">Money Bouquets</a></li>
+                        <li><a href="#" onclick="showCategory('varmala', 'Wedding Varmala', event)" class="hover:text-primary transition-colors">Wedding Varmala</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-bold mb-4 uppercase tracking-wider text-sm">Contact Us</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-location-dot mt-1 text-primary"></i><span>123, AB Road, near Palasia Square, Indore, MP</span></li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-primary"></i><span>+91 8770836221</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-pink-100 pt-8 flex flex-col md:flex-row items-center justify-center text-sm text-gray-500 font-medium">
+                <p>&copy; 2026 Indore Florist. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ENGINE: Smart Auto-Detect Local Catalog ---
+        
+        // Generator function for Local Folders - Auto-detects available images up to maxItems
+        function generateLocalData(folderPath, categoryName, prefixName, maxItems = 100) {
+            let result = [];
+            for (let i = 1; i <= maxItems; i++) {
+                result.push({
+                    id: `${prefixName}-${i}`,
+                    name: `Premium ${categoryName} - Design ${i}`,
+                    img: `${folderPath}/${i}.webp`,
+                    isLocal: true // Flag to trigger smart auto-remove logic if image doesn't exist
+                });
+            }
+            return result;
+        }
+
+        // Database mapping to your exact updated folder names
+        const db = {
+            flowers: generateLocalData('Flower bouquet image data', 'Flower Bouquet', 'flw'),
+            notes: generateLocalData('Money bouquet image data', 'Money Bouquet', 'not'),
+            chocolates: generateLocalData('Chocolate bouquet image data', 'Chocolate Bouquet', 'cho'),
+            varmala: generateLocalData('Wedding Varmala image data', 'Wedding Varmala', 'var'),
+            jewelry: generateLocalData('Flower jewelry image data', 'Flower Jewelry', 'jwl'),
+            chadar: generateLocalData('Bride entry chadar image data', 'Bride Entry Chadar', 'cha'),
+            car: generateLocalData('Car decoration image data', 'Car Decoration', 'car'),
+            room: generateLocalData('Room decoration image data', 'Room Decoration', 'rom')
+        };
+
+        // --- UI NAVIGATION & RENDERING ENGINE ---
+
+        function showHome(event) {
+            if(event) event.preventDefault();
+            document.getElementById('category-view').classList.add('hidden');
+            document.getElementById('home-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showCategory(categoryKey, categoryName, event) {
+            if(event) event.preventDefault();
+            
+            // Switch Views
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('category-view').classList.remove('hidden');
+            
+            // Update Headers
+            document.getElementById('category-page-title').innerText = categoryName;
+            document.getElementById('breadcrumb-current').innerText = categoryName;
+            
+            // Fetch Products
+            const products = db[categoryKey];
+            
+            // Set initial count (Auto-remover will reduce this if files are missing)
+            if(products) {
+                document.getElementById('product-count-text').innerHTML = `Displaying <b id="current-count" class="text-primary">${products.length}</b> gorgeous designs in this catalog`;
+            }
+
+            // Render Products
+            const grid = document.getElementById('dynamic-product-grid');
+            grid.innerHTML = ''; // clear current
+            
+            if (products) {
+                products.forEach(p => {
+                    // Smart image handler: If the image fails to load (doesn't exist in folder), trigger handleImageError
+                    let onErrorHandler = "handleImageError(this)";
+
+                    grid.innerHTML += `
+                        <div class="product-card bg-white rounded-3xl border border-pink-50 overflow-hidden flex flex-col h-full group relative hover:shadow-xl hover:shadow-pink-100 transition-all duration-300 transform hover:-translate-y-1 z-20">
+                            <!-- Image container (Clickable for WhatsApp, Zoom on hover, no blur) -->
+                            <div onclick="sendWhatsApp('${p.name.replace(/'/g, "\\'")}', '${p.img}')" class="relative w-full aspect-[3/4] overflow-hidden bg-pink-50 cursor-pointer">
+                                <img src="${p.img}" alt="${p.name}" onerror="${onErrorHandler}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            </div>
+                            <!-- Card Content -->
+                            <div class="p-4 flex flex-col flex-grow bg-white items-center text-center">
+                                <h3 class="text-sm font-bold text-gray-800 line-clamp-2 mb-3 leading-tight group-hover:text-primary transition-colors">${p.name}</h3>
+                                
+                                <!-- Inquire Now Button -->
+                                <button onclick="sendWhatsApp('${p.name.replace(/'/g, "\\'")}', '${p.img}')" class="mt-auto w-full py-2.5 bg-green-50 text-green-700 border border-green-100 font-semibold rounded-xl hover:bg-whatsapp hover:border-whatsapp hover:text-white transition-colors flex justify-center items-center gap-2 shadow-sm relative z-30 cursor-pointer">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i> Inquire Now
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Scroll to top of category view
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- AUTO-REMOVE MISSING IMAGES ENGINE ---
+        function handleImageError(imgElement) {
+            // Remove the card if the local image doesn't exist in the folder yet
+            const card = imgElement.closest('.product-card');
+            if (card) {
+                card.remove();
+                
+                // Automatically decrease the displayed total count
+                const countEl = document.getElementById('current-count');
+                if (countEl) {
+                    let currentCount = parseInt(countEl.innerText);
+                    if (!isNaN(currentCount) && currentCount > 0) {
+                        countEl.innerText = currentCount - 1;
+                    }
+                }
+            }
+        }
+
+        // --- WHATSAPP REDIRECTION ENGINE ---
+        function sendWhatsApp(productName, productImg) {
+            const phoneNumber = "918770836221"; // Updated business phone number
+            
+            // Create the absolute URL for the image so WhatsApp can grab a thumbnail preview
+            const fullImageUrl = new URL(productImg, window.location.href).href;
+
+            const message = `Hello Indore Florist! 🌸\n\nI am in love with this design from your digital catalog:\n\n*Design:* ${productName}\n*Image Link:* ${fullImageUrl}\n\nPlease let me know the price and other details!`;
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
+        }
+
+    </script>
+</body>
+</html>
